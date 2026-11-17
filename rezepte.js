@@ -49,6 +49,16 @@ Object.assign(ING, {
   reisnudeln: { n: 'Reisnudeln', u: 'g', c: 'vorrat' },
   senf: { n: 'Senf', u: '', c: 'vorrat' },
   essig: { n: 'Essig (Apfel oder Balsamico)', u: '', c: 'vorrat' },
+
+  rosenkohl: { n: 'Rosenkohl', u: 'g', c: 'gemuese', pk: [500, 'Netz'], idee: 'Halbiert mit Öl und Salz im Ofen rösten oder in feinen Streifen in die Gemüsepfanne.' },
+  gruenkohl: { n: 'Grünkohl, geputzt', u: 'g', c: 'gemuese', pk: [500, 'Beutel'], idee: 'Hält im Kühlschrank etwa fünf Tage. Rest in den Linseneintopf oder kurz blanchieren und einfrieren.' },
+  pastinake: { n: 'Pastinaken', u: 'g', c: 'gemuese', pk: [500, 'Beutel'], idee: 'Halten im Gemüsefach etwa zwei Wochen. In Stiften mit aufs Ofenblech oder in die Restesuppe.' },
+  gruenebohnen: { n: 'Grüne Bohnen', u: 'g', c: 'tk', pk: [450, 'Beutel'], idee: 'Bleiben im Tiefkühler. 6 Minuten gekocht passen sie in Salat, Curry und Gemüsepfanne.' },
+  lasagne: { n: 'Vollkorn-Lasagneplatten', u: 'g', c: 'vorrat' },
+  popcornmais: { n: 'Popcornmais', u: 'g', c: 'vorrat' },
+  staerke: { n: 'Speisestärke', u: '', c: 'vorrat' },
+  meerrettich: { n: 'Meerrettich (Glas)', u: '', c: 'vorrat' },
+  kakao: { n: 'Backkakao, ungesüßt', u: '', c: 'vorrat' },
 });
 
 // Topf, Stange und Knolle sind zählbar wie Stück.
@@ -113,6 +123,44 @@ Object.assign(RECIPES, {
     meal: 'f', n: 'Kräuterquark-Brot mit Gurke und Kresse', min: 5, kcal: [280, 420], tags: [],
     ing: [['brot', 50, 100], ['quark', 80, 100], ['schnittlauch', 0.25, 0.25], ['gurke', 0.25, 0.25], ['kresse', 0.25, 0.25], ['leinoel', 5, 5]],
     steps: ['Quark mit Leinöl, Schnittlauch, Salz und Pfeffer verrühren.', 'Aufs Brot streichen, Gurkenscheiben und Kresse darauf.'],
+  },
+  hafer_pancakes: {
+    meal: 'f', n: 'Haferflocken-Pfannkuchen mit Beeren und Joghurt', min: 20, kcal: [450, 630], tags: ['hirn'],
+    ing: [['haferflocken', 40, 60], ['eier', 1, 2], ['milch', 50, 80], ['banane', 0.5, 0.5], ['beeren', 100, 100], ['joghurt', 75, 100], ['olivenoel', 5, 5], ['gewuerze', 0, 0]],
+    steps: ['Haferflocken, Eier, Milch und Banane mit einer Prise Salz und Zimt fein pürieren, 5 Minuten quellen lassen.', 'In einer beschichteten Pfanne mit wenig Öl kleine Pfannkuchen backen, je Seite etwa 2 Minuten.', 'Beeren kurz in der Pfanne erwärmen und mit dem Joghurt auf die Pfannkuchen geben.'],
+    hint: 'Ohne Zucker: Die Süße kommt aus der Banane.',
+  },
+  ruehrei_brot: {
+    meal: 'f', n: 'Rührei mit Schnittlauch auf Vollkornbrot', er: 'mit Räucherlachs', min: 10, kcal: [340, 540], tags: ['hirn', 'fisch'],
+    ing: [['eier', 2, 2], ['brot', 50, 100], ['schnittlauch', 0.25, 0.25], ['tomaten', 1, 1], ['olivenoel', 5, 5], ['raeucherlachs', 0, 50]],
+    steps: ['Eier mit Salz und Pfeffer verquirlen, in Öl bei kleiner Hitze langsam stocken lassen und dabei mit dem Pfannenwender schieben.', 'Rührei auf das Brot geben, Schnittlauch darüber, Tomate in Scheiben dazu.', 'Er: Räucherlachs auf das Brot legen.'],
+  },
+  baked_oats: {
+    meal: 'f', n: 'Gebackene Haferflocken mit Beeren und Mandeln', min: 30, kcal: [460, 580], tags: ['hirn'],
+    ing: [['haferflocken', 50, 70], ['eier', 1, 1], ['milch', 100, 120], ['banane', 0.5, 0.5], ['beeren', 80, 80], ['mandeln', 10, 15], ['gewuerze', 0, 0]],
+    steps: ['Ofen auf 180 °C vorheizen. Banane zerdrücken, mit Ei, Milch, Haferflocken und Zimt verrühren.', 'Je Person in eine kleine Auflaufform füllen, Beeren hineindrücken, gehackte Mandeln darüber.', '25 Minuten backen, bis die Oberfläche fest ist.'],
+    hint: 'Lässt sich am Vorabend backen und kalt oder kurz aufgewärmt essen.',
+  },
+  quark_orange: {
+    meal: 'f', n: 'Quark mit Orange, Mandeln und Zimt', min: 5, kcal: [340, 480], tags: ['ruhe'],
+    ing: [['quark', 150, 200], ['milch', 30, 30], ['orange', 1, 1], ['haferflocken', 20, 40], ['mandeln', 15, 20], ['gewuerze', 0, 0]],
+    steps: ['Quark mit Milch glatt rühren.', 'Orange schälen, in Stücke schneiden und mit den Haferflocken unterheben.', 'Gehackte Mandeln und Zimt darüber.'],
+  },
+  herzhafter_hafer: {
+    meal: 'f', n: 'Herzhafter Haferbrei mit Spinat, Feta und Spiegelei', min: 15, kcal: [340, 500], tags: ['hirn'],
+    ing: [['haferflocken', 40, 60], ['bruehe', 0, 0], ['spinat', 50, 50], ['feta', 20, 20], ['eier', 1, 2], ['olivenoel', 5, 5], ['gewuerze', 0, 0]],
+    steps: ['Haferflocken mit der doppelten Menge Gemüsebrühe aufkochen und 3 Minuten köcheln.', 'Spinat unterrühren, bis er zusammenfällt, mit Pfeffer abschmecken.', 'Eier in Öl als Spiegelei braten und mit dem zerbröselten Feta auf den Brei geben.'],
+    hint: 'Gute Verwendung für einen Rest Babyspinat.',
+  },
+  caprese_brot: {
+    meal: 'f', n: 'Vollkornbrot mit Tomate, Mozzarella und Basilikum', min: 5, kcal: [280, 390], tags: [],
+    ing: [['brot', 50, 100], ['mozzarella', 60, 60], ['tomaten', 1, 1], ['basilikum', 0.25, 0.25], ['olivenoel', 5, 5], ['gewuerze', 0, 0]],
+    steps: ['Tomate und Mozzarella in Scheiben schneiden und abwechselnd auf das Brot legen.', 'Mit Basilikum, Salz, Pfeffer und ein paar Tropfen Olivenöl.'],
+  },
+  hummus_eibrot: {
+    meal: 'f', n: 'Hummus-Brot mit Ei, Paprika und Kresse', min: 10, kcal: [320, 430], tags: ['hirn'],
+    ing: [['brot', 50, 100], ['hummus', 40, 40], ['eier', 1, 1], ['paprika', 0.5, 0.5], ['kresse', 0.25, 0.25]],
+    steps: ['Eier 9 Minuten hart kochen, abschrecken und in Scheiben schneiden.', 'Brot mit Hummus bestreichen, Ei und Paprikastreifen darauf, Kresse darüber.'],
   },
 
   // ---------- Mittag ----------
@@ -201,6 +249,56 @@ Object.assign(RECIPES, {
     meal: 'm', n: 'Weißer Bohnensalat mit Tomaten und Rucola', er: 'mit Thunfisch', min: 10, kcal: [420, 560], tags: [],
     ing: [['weissebohnen', 180, 120], ['tomaten', 2, 2], ['zwiebel', 0.25, 0.25], ['rucola', 30, 30], ['petersilie', 0.25, 0.25], ['olivenoel', 10, 10], ['zitrone', 0.25, 0.25], ['brot', 0, 50], ['thunfisch', 0, 100], ['mozzarella', 60, 0]],
     steps: ['Bohnen abspülen, Tomaten würfeln, Zwiebel fein hacken.', 'Mit Öl, Zitrone, Petersilie, Salz und Pfeffer mischen, auf Rucola anrichten.', 'Sie: Mozzarella, er: Thunfisch darauf.'],
+  },
+  rote_bete_suppe: {
+    meal: 'm', n: 'Rote-Bete-Suppe mit Meerrettich-Joghurt', min: 30, kcal: [500, 640], tags: [],
+    ing: [['rotebete', 250, 250], ['kartoffeln', 100, 150], ['zwiebel', 0.5, 0.5], ['apfel', 0.5, 0.5], ['weissebohnen', 80, 80], ['bruehe', 0, 0], ['olivenoel', 5, 5], ['essig', 0, 0], ['joghurt', 50, 50], ['meerrettich', 0, 0], ['dill', 0.25, 0.25], ['brot', 50, 100]],
+    steps: ['Zwiebel, Kartoffeln und Apfel würfeln und in Öl anschwitzen.', 'Rote Bete würfeln, mit 600 ml Brühe dazugeben und 15 Minuten köcheln.', 'Abgespülte Bohnen dazugeben, fein pürieren, mit Salz, Pfeffer und einem Schuss Essig abschmecken.', 'Joghurt mit einem Teelöffel Meerrettich verrühren, auf die Suppe geben, Dill darüber. Brot dazu.'],
+    hint: 'Die Bohnen machen die Suppe sämig und liefern Eiweiß. Rote Bete färbt stark: Brett und Hände gleich abwaschen.',
+  },
+  minestrone: {
+    meal: 'm', n: 'Minestrone mit weißen Bohnen und Pesto', min: 35, kcal: [400, 550], tags: ['ruhe'],
+    ing: [['suppengruen', 0.5, 0.5], ['zucchini', 0.5, 0.5], ['dosentomaten', 200, 200], ['weissebohnen', 120, 120], ['pasta', 30, 40], ['bruehe', 0, 0], ['pesto', 10, 10], ['olivenoel', 5, 5], ['brot', 0, 50]],
+    steps: ['Suppengrün und Zucchini klein würfeln und in Öl 5 Minuten anschwitzen.', 'Tomaten und 800 ml Brühe dazu, 15 Minuten köcheln.', 'Pasta und abgespülte Bohnen dazugeben und etwa 10 Minuten garen, bis die Nudeln bissfest sind.', 'In Tellern mit je zwei Teelöffeln Pesto servieren.'],
+    hint: 'Lässt sich doppelt kochen und portionsweise einfrieren. Die Nudeln dann erst beim Aufwärmen frisch dazugeben.',
+  },
+  sushi_bowl: {
+    meal: 'm', n: 'Sushi-Bowl mit Gurke, Avocado und Edamame', er: 'mit Räucherlachs', min: 40, kcal: [520, 650], tags: ['hirn', 'fisch'],
+    ing: [['reis', 60, 80], ['edamame', 120, 50], ['gurke', 0.5, 0.5], ['avocado', 0.5, 0.5], ['karotten', 50, 50], ['sojasauce', 0, 0], ['essig', 0, 0], ['sesam', 0, 0], ['raeucherlachs', 0, 80]],
+    steps: ['Reis kochen, mit einem Esslöffel Essig und einer Prise Salz mischen und abkühlen lassen.', 'Edamame 3 Minuten kochen. Gurke und Avocado in Scheiben schneiden, Karotte raspeln.', 'Alles auf dem Reis anrichten, mit Sojasauce und Sesam. Er: Räucherlachs in Streifen darauf.'],
+    hint: 'Mit Reis vom Vortag in zehn Minuten fertig.',
+  },
+  paprika_suppe: {
+    meal: 'm', n: 'Geröstete Paprika-Tomaten-Suppe mit Feta', min: 40, kcal: [510, 620], tags: [],
+    ing: [['paprika', 1, 1], ['tomaten', 3, 3], ['zwiebel', 0.5, 0.5], ['knoblauch', 0, 0], ['weissebohnen', 120, 120], ['bruehe', 0, 0], ['olivenoel', 10, 10], ['feta', 30, 30], ['basilikum', 0.25, 0.25], ['brot', 50, 100], ['gewuerze', 0, 0]],
+    steps: ['Paprika, Tomaten und Zwiebel grob schneiden, mit Knoblauch, Öl und Salz bei 220 °C 25 Minuten rösten.', 'Mit abgespülten Bohnen und 400 ml Brühe in einen Topf geben, aufkochen und fein pürieren.', 'Mit Paprikapulver, Salz und Pfeffer abschmecken, Feta und Basilikum darüber. Brot dazu.'],
+  },
+  brokkoli_quinoa: {
+    meal: 'm', n: 'Brokkoli-Quinoa-Salat mit Mandeln und Zitrone', sie: 'mit Feta', er: 'mit Hähnchen', min: 25, kcal: [530, 630], tags: ['hirn'],
+    ing: [['quinoa', 60, 80], ['brokkoli', 200, 200], ['fruehlingszwiebel', 0.25, 0.25], ['mandeln', 15, 15], ['zitrone', 0.5, 0.5], ['olivenoel', 5, 5], ['senf', 0, 0], ['feta', 40, 0], ['haehnchen', 0, 120]],
+    steps: ['Quinoa kochen. Brokkoli in kleine Röschen teilen, die letzten 3 Minuten mitkochen und abgießen.', 'Zitronensaft mit Öl, Senf, Salz und Pfeffer verrühren und untermischen.', 'Frühlingszwiebeln und gehackte Mandeln darüber. Sie: Feta darauf. Er: Hähnchen braten und in Streifen dazu.'],
+    hint: 'Hält zwei Tage im Kühlschrank und eignet sich zum Mitnehmen.',
+  },
+  quesadilla: {
+    meal: 'm', n: 'Bohnen-Quesadillas mit Mais und Salat', er: 'mit Hähnchen', min: 20, kcal: [460, 680], tags: [],
+    ing: [['wraps', 1, 2], ['schwarzebohnen', 100, 80], ['mais', 40, 40], ['paprika', 0.5, 0.5], ['mozzarella', 40, 40], ['tomaten', 1, 1], ['joghurt', 50, 50], ['romana', 0.5, 0.5], ['gewuerze', 0, 0], ['haehnchen', 0, 60]],
+    steps: ['Bohnen grob zerdrücken, mit Mais, Paprikawürfeln, Kreuzkümmel und Salz mischen. Er: Hähnchen in kleinen Würfeln anbraten und unter seine Füllung geben.', 'Füllung auf eine Hälfte der Wraps geben, Mozzarella darüber, zuklappen.', 'In einer Pfanne ohne Fett je Seite 2–3 Minuten goldbraun braten, in Stücke schneiden.', 'Mit Joghurt, Tomatenwürfeln und Salat essen.'],
+  },
+  pastinaken_suppe: {
+    meal: 'm', n: 'Pastinaken-Linsen-Suppe mit Apfel', min: 30, kcal: [490, 650], tags: ['ruhe'],
+    ing: [['pastinake', 250, 250], ['rotelinsen', 30, 40], ['zwiebel', 0.5, 0.5], ['apfel', 0.5, 0.5], ['ingwer', 0.25, 0.25], ['bruehe', 0, 0], ['frischkaese', 20, 20], ['olivenoel', 5, 5], ['kuerbiskerne', 10, 15], ['brot', 0, 50], ['gewuerze', 0, 0]],
+    steps: ['Pastinaken schälen und würfeln, Zwiebel, Apfel und Ingwer klein schneiden, in Öl anschwitzen.', 'Linsen und 700 ml Brühe dazu, 20 Minuten köcheln.', 'Frischkäse dazugeben, fein pürieren, mit Salz, Pfeffer und Muskat abschmecken.', 'Kürbiskerne ohne Fett rösten und darüberstreuen.'],
+  },
+  nicoise: {
+    meal: 'm', n: 'Salat Niçoise mit Kartoffeln, grünen Bohnen und Ei', er: 'mit Thunfisch', min: 25, kcal: [420, 590], tags: ['hirn'],
+    ing: [['kartoffeln', 150, 200], ['gruenebohnen', 100, 100], ['eier', 2, 1], ['tomaten', 1, 1], ['romana', 0.5, 0.5], ['olivenoel', 10, 10], ['senf', 0, 0], ['essig', 0, 0], ['brot', 0, 50], ['thunfisch', 0, 100]],
+    steps: ['Kartoffeln mit Schale kochen, pellen und in Scheiben schneiden. Grüne Bohnen die letzten 6 Minuten mitkochen.', 'Eier 8 Minuten kochen, abschrecken und vierteln.', 'Öl, Essig, Senf, Salz und Pfeffer verrühren.', 'Salat, Tomaten, Kartoffeln, Bohnen und Eier anrichten, Dressing darüber. Er: Thunfisch dazu.'],
+  },
+  gruenkohl_salat: {
+    meal: 'm', n: 'Grünkohl-Salat mit Linsen, Apfel und Walnüssen', min: 30, kcal: [530, 600], tags: ['hirn', 'ruhe'],
+    ing: [['gruenkohl', 80, 80], ['berglinsen', 50, 70], ['apfel', 0.5, 0.5], ['walnuss', 15, 15], ['feta', 30, 30], ['zitrone', 0.5, 0.5], ['olivenoel', 10, 10], ['honig', 0, 0], ['senf', 0, 0]],
+    steps: ['Linsen 20–25 Minuten kochen und abgießen.', 'Grünkohl ohne dicke Stiele fein schneiden, mit Zitronensaft, Öl und einer Prise Salz 2 Minuten mit den Händen kneten, bis er weicher wird.', 'Einen Teelöffel Honig und Senf unterrühren, Linsen und Apfelwürfel untermischen.', 'Walnüsse und Feta darüber.'],
+    hint: 'Durch das Kneten wird roher Grünkohl zart. Der Salat hält einen Tag im Kühlschrank.',
   },
 
   // ---------- Abend ----------
@@ -312,6 +410,76 @@ Object.assign(RECIPES, {
     steps: ['Quinoa kochen.', 'Rotkohl in Streifen mit Öl 5 Minuten anbraten, Apfelwürfel dazu, mit Essig und Honig abschmecken.', 'Er: Pute in Streifen braten.', 'Alles in Schalen, Walnüsse darüber, sie mit Ziegenkäse.'],
     hint: 'Verbraucht den Rest Rotkohl aus der Buddha-Bowl.',
   },
+  rosenkohl_ofen: {
+    meal: 'a', n: 'Ofen-Rosenkohl mit Süßkartoffel und Honig-Senf', sie: 'mit Feta und Walnüssen', er: 'mit Lachs', min: 40, kcal: [550, 640], tags: ['hirn', 'fisch'],
+    ing: [['rosenkohl', 250, 250], ['suesskartoffel', 200, 200], ['zwiebel', 0.5, 0.5], ['olivenoel', 5, 5], ['honig', 0, 0], ['senf', 0, 0], ['feta', 40, 0], ['walnuss', 10, 0], ['lachs', 0, 125]],
+    steps: ['Ofen auf 200 °C vorheizen. Rosenkohl halbieren, Süßkartoffel würfeln, Zwiebel in Spalten schneiden.', 'Mit Öl und Salz mischen und auf einem Blech 30 Minuten rösten.', 'Er: Lachs salzen und die letzten 12–15 Minuten mit auf das Blech legen.', 'Je Person einen Teelöffel Honig mit einem Teelöffel Senf und etwas Wasser verrühren und über das Gemüse geben. Sie: Feta und Walnüsse darüber.'],
+  },
+  pilzreis: {
+    meal: 'a', n: 'Cremiger Pilzreis mit Erbsen und Spinat', er: 'mit Hähnchen', min: 45, kcal: [480, 630], tags: ['ruhe'],
+    ing: [['reis', 60, 80], ['champignons', 250, 250], ['erbsen', 100, 60], ['zwiebel', 0.5, 0.5], ['knoblauch', 0, 0], ['bruehe', 0, 0], ['frischkaese', 40, 30], ['spinat', 50, 50], ['petersilie', 0.25, 0.25], ['olivenoel', 5, 5], ['haehnchen', 0, 120]],
+    steps: ['Zwiebel und Knoblauch in Öl anschwitzen, Reis kurz mitrösten.', 'Nach und nach etwa 700 ml heiße Brühe angießen und den Reis unter gelegentlichem Rühren 35–40 Minuten garen.', 'Pilze in Scheiben in einer zweiten Pfanne kräftig anbraten. Er: Hähnchen in Streifen braten.', 'Pilze, Erbsen, Spinat und Frischkäse unter den Reis rühren, 3 Minuten ziehen lassen, Petersilie darüber.'],
+    hint: 'Vollkornreis braucht länger als Risottoreis, wird mit Frischkäse aber ebenso cremig.',
+  },
+  senfeier: {
+    meal: 'a', n: 'Senfsoße mit Kartoffeln und Brokkoli', sie: 'mit Eiern', er: 'mit Kabeljau', min: 30, kcal: [510, 590], tags: ['hirn'],
+    ing: [['kartoffeln', 250, 350], ['brokkoli', 200, 200], ['milch', 150, 150], ['frischkaese', 20, 20], ['senf', 0, 0], ['staerke', 0, 0], ['dill', 0.25, 0.25], ['eier', 2, 0], ['kabeljau', 0, 150], ['olivenoel', 0, 5], ['zitrone', 0, 0.25]],
+    steps: ['Kartoffeln kochen, Brokkoli die letzten 5 Minuten mit in den Topf geben. Sie: Eier 8 Minuten kochen und pellen.', 'Milch erhitzen. Je 150 ml Milch einen gestrichenen Teelöffel Stärke in etwas kalter Milch anrühren, einrühren und aufkochen lassen.', 'Frischkäse und je Person einen Esslöffel Senf einrühren, mit Salz, Pfeffer und Dill abschmecken.', 'Er: Kabeljau salzen und in wenig Öl in einer beschichteten Pfanne je Seite 3–4 Minuten braten, mit Zitrone beträufeln.', 'Eier halbieren und in die Soße legen, alles mit Kartoffeln und Brokkoli anrichten.'],
+    hint: 'Leichte Form der Senfeier: Milch und Frischkäse statt Mehlschwitze mit Sahne.',
+  },
+  gruenkohl_pasta: {
+    meal: 'a', n: 'Vollkornpasta mit Grünkohl, Zitrone und Walnüssen', sie: 'mit Feta', er: 'mit Garnelen', min: 25, kcal: [550, 670], tags: ['hirn'],
+    ing: [['pasta', 70, 100], ['gruenkohl', 150, 150], ['knoblauch', 0, 0], ['zitrone', 0.25, 0.25], ['walnuss', 15, 15], ['olivenoel', 5, 5], ['feta', 30, 0], ['garnelen', 0, 120]],
+    steps: ['Pasta kochen. Grünkohl ohne dicke Stiele in Streifen schneiden und die letzten 4 Minuten mitkochen. Eine Tasse Kochwasser auffangen.', 'Knoblauch in Öl kurz anbraten. Er: Garnelen in einer zweiten Pfanne 2–3 Minuten braten.', 'Pasta und Grünkohl mit dem Knoblauch, etwas Kochwasser, abgeriebener Zitronenschale und Zitronensaft mischen, salzen und pfeffern.', 'Gehackte Walnüsse darüber. Sie: Feta darauf.'],
+    hint: 'Für die Schale eine unbehandelte Zitrone nehmen.',
+  },
+  kuerbis_curry: {
+    meal: 'a', n: 'Kürbis-Curry mit Spinat und Reis', sie: 'mit Kichererbsen', er: 'mit Hähnchen', min: 35, kcal: [550, 680], tags: ['ruhe'],
+    ing: [['kuerbis', 250, 250], ['zwiebel', 0.5, 0.5], ['ingwer', 0.25, 0.25], ['knoblauch', 0, 0], ['currypaste', 0, 0], ['kokosmilch', 75, 75], ['spinat', 50, 50], ['reis', 50, 70], ['kichererbsen', 120, 60], ['haehnchen', 0, 120], ['zitrone', 0.25, 0.25]],
+    steps: ['Reis kochen.', 'Zwiebel, Ingwer und Knoblauch anschwitzen, Currypaste kurz mitrösten.', 'Kürbis mit Schale würfeln, mit Kokosmilch und 250 ml Wasser 15 Minuten köcheln. Er: Hähnchen in Würfeln separat anbraten.', 'Kichererbsen dazugeben und erhitzen, Spinat unterrühren. Hähnchen unter seine Portion mischen, mit Zitrone abschmecken.'],
+    hint: 'Verbraucht einen halben Hokkaido.',
+  },
+  burrito_bowl: {
+    meal: 'a', n: 'Burrito-Bowl mit Reis, Bohnen und Avocado', er: 'mit Rinderhack', min: 35, kcal: [530, 670], tags: ['ruhe'],
+    ing: [['reis', 50, 70], ['schwarzebohnen', 120, 80], ['mais', 50, 50], ['tomaten', 1, 1], ['avocado', 0.5, 0.5], ['romana', 0.5, 0.5], ['zwiebel', 0.25, 0.25], ['joghurt', 50, 50], ['zitrone', 0.25, 0.25], ['gewuerze', 0, 0], ['hack', 0, 80]],
+    steps: ['Reis kochen.', 'Bohnen mit Mais, Kreuzkümmel, Paprikapulver und etwas Wasser 5 Minuten erwärmen. Er: Hack krümelig anbraten und mit denselben Gewürzen abschmecken.', 'Tomate und Zwiebel fein würfeln, mit Zitronensaft und Salz als Salsa mischen. Avocado in Scheiben schneiden.', 'Salat in Streifen in Schalen geben, Reis, Bohnen, Salsa, Avocado und einen Klecks Joghurt darauf.'],
+  },
+  wrap_pizza: {
+    meal: 'a', n: 'Wrap-Pizza mit Paprika, Pilzen und Rucola', er: 'mit Thunfisch', min: 20, kcal: [490, 580], tags: [],
+    ing: [['wraps', 2, 2], ['dosentomaten', 80, 80], ['tomatenmark', 0, 0], ['mozzarella', 60, 60], ['paprika', 0.5, 0.5], ['champignons', 60, 60], ['rucola', 20, 20], ['gewuerze', 0, 0], ['thunfisch', 0, 80]],
+    steps: ['Ofen auf 220 °C vorheizen. Tomaten mit einem Teelöffel Tomatenmark, Oregano und Salz verrühren.', 'Wraps auf ein Blech legen und dünn mit der Tomatensoße bestreichen.', 'Paprikastreifen, Pilzscheiben und Mozzarella darauf verteilen. Er: Thunfisch zerpflückt dazu.', '8–10 Minuten backen, bis der Rand knusprig ist. Rucola darauf.'],
+    hint: 'Verbraucht Reste von Wraps, Mozzarella und Gemüse.',
+  },
+  ratatouille: {
+    meal: 'a', n: 'Ratatouille mit Bulgur', sie: 'mit Kichererbsen und Feta', er: 'mit Hähnchen', min: 45, kcal: [590, 660], tags: [],
+    ing: [['aubergine', 0.5, 0.5], ['zucchini', 0.5, 0.5], ['paprika', 1, 1], ['zwiebel', 0.5, 0.5], ['knoblauch', 0, 0], ['dosentomaten', 200, 200], ['olivenoel', 10, 10], ['basilikum', 0.25, 0.25], ['gewuerze', 0, 0], ['bulgur', 40, 70], ['kichererbsen', 80, 0], ['feta', 40, 0], ['haehnchen', 0, 150]],
+    steps: ['Aubergine, Zucchini, Paprika und Zwiebel in gleich große Würfel schneiden.', 'Aubergine in Öl rundum anbraten, dann das übrige Gemüse und Knoblauch 5 Minuten mitbraten.', 'Tomaten, Oregano und Rosmarin dazu, 20 Minuten schmoren. Sie: Kichererbsen die letzten 5 Minuten mitschmoren. Er: Hähnchen separat braten.', 'Bulgur mit der doppelten Menge kochendem Wasser 15 Minuten quellen lassen. Mit Basilikum servieren, sie mit Feta.'],
+    hint: 'Schmeckt aufgewärmt am nächsten Tag noch besser.',
+  },
+  linsen_lasagne: {
+    meal: 'a', n: 'Gemüse-Linsen-Lasagne', min: 75, kcal: [630, 730], tags: ['ruhe'],
+    ing: [['lasagne', 50, 60], ['rotelinsen', 40, 50], ['dosentomaten', 200, 200], ['tomatenmark', 0, 0], ['zucchini', 0.5, 0.5], ['karotten', 80, 80], ['zwiebel', 0.5, 0.5], ['knoblauch', 0, 0], ['spinat', 50, 50], ['quark', 100, 120], ['milch', 50, 50], ['mozzarella', 30, 40], ['olivenoel', 5, 5], ['gewuerze', 0, 0]],
+    steps: ['Zwiebel, Knoblauch, Karotten und Zucchini fein würfeln und in Öl anbraten, Tomatenmark kurz mitrösten.', 'Linsen, Tomaten und 300 ml Wasser dazu, 15 Minuten köcheln, mit Oregano, Salz und Pfeffer abschmecken. Spinat unterrühren.', 'Quark mit Milch, Salz, Pfeffer und Muskat glatt rühren.', 'In eine Auflaufform abwechselnd Soße, Lasagneplatten und Quarkcreme schichten, mit Soße enden. Mozzarella darauf.', 'Bei 180 °C etwa 35 Minuten backen und 5 Minuten ruhen lassen.'],
+    hint: 'Für beide gleich. Die doppelte Menge lohnt sich: portionsweise eingefroren hält sie drei Monate.',
+  },
+  bratkartoffeln_rotebete: {
+    meal: 'a', n: 'Bratkartoffeln mit Rote-Bete-Apfel-Salat', sie: 'mit Spiegeleiern', er: 'mit Räuchermakrele', min: 35, kcal: [580, 650], tags: ['hirn', 'fisch'],
+    ing: [['kartoffeln', 250, 300], ['zwiebel', 0.5, 0.5], ['olivenoel', 10, 10], ['rotebete', 150, 150], ['apfel', 0.5, 0.5], ['joghurt', 50, 50], ['meerrettich', 0, 0], ['schnittlauch', 0.25, 0.25], ['eier', 2, 0], ['makrele', 0, 80], ['gewuerze', 0, 0]],
+    steps: ['Kartoffeln mit Schale kochen und abkühlen lassen, am besten schon am Vortag.', 'In Scheiben schneiden und in Öl bei mittlerer Hitze 15 Minuten goldbraun braten, Zwiebelstreifen die letzten 5 Minuten dazu. Mit Salz, Pfeffer und Kümmel würzen.', 'Rote Bete und Apfel würfeln, mit Joghurt, einem Teelöffel Meerrettich und Schnittlauch mischen.', 'Sie: zwei Spiegeleier braten. Er: Makrele in Stücken dazu.'],
+    hint: 'Gute Verwendung für Pellkartoffeln vom Vortag.',
+  },
+  linsen_eintopf: {
+    meal: 'a', n: 'Linseneintopf mit Gemüse und Kartoffeln', min: 45, kcal: [440, 620], tags: ['ruhe'],
+    ing: [['berglinsen', 70, 80], ['suppengruen', 0.5, 0.5], ['kartoffeln', 150, 200], ['zwiebel', 0.5, 0.5], ['tomatenmark', 0, 0], ['bruehe', 0, 0], ['olivenoel', 5, 5], ['essig', 0, 0], ['senf', 0, 0], ['petersilie', 0.25, 0.25], ['brot', 0, 50], ['gewuerze', 0, 0]],
+    steps: ['Zwiebel und Suppengrün würfeln, in Öl anschwitzen, Tomatenmark kurz mitrösten.', 'Linsen, Kartoffelwürfel und 1 l Brühe dazu, 30 Minuten köcheln, bis die Linsen weich sind.', 'Mit einem Schuss Essig, einem Teelöffel Senf, Salz und Pfeffer abschmecken. Petersilie darüber.'],
+    hint: 'Hält drei Tage im Kühlschrank und lässt sich einfrieren.',
+  },
+  zucchini_puffer: {
+    meal: 'a', n: 'Zucchini-Kartoffel-Puffer mit Kräuterquark und Salat', min: 35, kcal: [520, 600], tags: ['hirn'],
+    ing: [['zucchini', 1, 1], ['kartoffeln', 150, 200], ['eier', 1, 1], ['haferflocken', 20, 30], ['olivenoel', 10, 10], ['quark', 100, 125], ['leinoel', 5, 5], ['schnittlauch', 0.25, 0.25], ['romana', 0.5, 0.5], ['gewuerze', 0, 0]],
+    steps: ['Zucchini und geschälte Kartoffeln grob raspeln, salzen, 10 Minuten ziehen lassen und in einem Tuch kräftig ausdrücken.', 'Mit Eiern und Haferflocken mischen, mit Pfeffer und Muskat würzen.', 'In Öl kleine Puffer bei mittlerer Hitze je Seite 4 Minuten goldbraun braten.', 'Quark mit Leinöl, Schnittlauch, Salz und Pfeffer verrühren. Mit Salat servieren.'],
+    hint: 'Für beide gleich. Das Leinöl im Quark liefert ihr Omega-3.',
+  },
 
   // ---------- Snacks ----------
   kichererbsen_snack: {
@@ -363,5 +531,35 @@ Object.assign(RECIPES, {
     meal: 's', n: 'Orange mit ein paar Mandeln', min: 2, kcal: [130, 130], tags: [],
     ing: [['orange', 1, 1], ['mandeln', 10, 10]],
     steps: ['Orange schälen, dazu eine kleine Handvoll Mandeln.'],
+  },
+  popcorn: {
+    meal: 's', n: 'Selbst gemachtes Popcorn', min: 5, kcal: [100, 100], tags: [],
+    ing: [['popcornmais', 20, 20], ['olivenoel', 3, 3], ['gewuerze', 0, 0]],
+    steps: ['Öl und Mais in einen Topf geben, Deckel auflegen und bei mittlerer bis hoher Hitze erhitzen.', 'Sobald die ersten Körner platzen, den Topf ab und zu rütteln. Platzt nur noch alle paar Sekunden ein Korn, vom Herd nehmen.', 'Mit Salz oder Zimt würzen.'],
+  },
+  huettenkaese_tomate: {
+    meal: 's', n: 'Hüttenkäse mit Tomate und Schnittlauch', min: 3, kcal: [120, 120], tags: [],
+    ing: [['huettenkaese', 100, 100], ['tomaten', 1, 1], ['schnittlauch', 0.25, 0.25], ['gewuerze', 0, 0]],
+    steps: ['Tomate würfeln, mit Hüttenkäse und Schnittlauch mischen, pfeffern.'],
+  },
+  beereneis: {
+    meal: 's', n: 'Schnelles Beeren-Joghurt-Eis', min: 5, kcal: [130, 130], tags: ['hirn'],
+    ing: [['beeren', 100, 100], ['joghurt', 100, 100], ['honig', 0, 0]],
+    steps: ['Gefrorene Beeren mit Joghurt und einem Teelöffel Honig im Mixer kurz pürieren, bis eine feste Creme entsteht.', 'Sofort essen.'],
+  },
+  birne_walnuss: {
+    meal: 's', n: 'Birne mit Walnüssen', min: 2, kcal: [160, 160], tags: ['hirn'],
+    ing: [['birne', 1, 1], ['walnuss', 10, 10]],
+    steps: ['Birne in Spalten schneiden, dazu ein paar Walnusshälften.'],
+  },
+  gurke_frischkaese: {
+    meal: 's', n: 'Gurkenschiffchen mit Frischkäse und Kresse', min: 5, kcal: [70, 70], tags: [],
+    ing: [['gurke', 0.25, 0.25], ['frischkaese', 30, 30], ['kresse', 0.25, 0.25], ['gewuerze', 0, 0]],
+    steps: ['Gurkenstück längs halbieren und die Kerne mit einem Löffel herauskratzen.', 'Frischkäse einfüllen, mit Kresse und Pfeffer bestreuen.'],
+  },
+  kakao_skyr: {
+    meal: 's', n: 'Kakao-Skyr mit Beeren', min: 3, kcal: [140, 140], tags: ['ruhe'],
+    ing: [['skyr', 150, 150], ['kakao', 0, 0], ['beeren', 50, 50], ['honig', 0, 0]],
+    steps: ['Skyr mit einem Teelöffel Kakao und einem halben Teelöffel Honig glatt rühren.', 'Beeren darauf.'],
   },
 });
