@@ -1,6 +1,6 @@
 // Offline-Unterstützung: zuerst das Netz fragen (immer die neueste Fassung), sonst aus dem Zwischenspeicher.
-const CACHE = 'essensplan-v1';
-const FILES = ['./', 'index.html', 'styles.css', 'data.js', 'app.js', 'icon.svg', 'manifest.webmanifest'];
+const CACHE = 'essensplan-v2';
+const FILES = ['./', 'index.html', 'styles.css', 'data.js', 'rezepte.js', 'app.js', 'icon.svg', 'manifest.webmanifest'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)).then(() => self.skipWaiting()));

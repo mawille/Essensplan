@@ -1,7 +1,7 @@
 // Anzeige und Rechnen. Die Inhalte stehen in data.js.
 
 const STORE_KEY = 'essensplan-v1';
-const state = { person: 'beide', tab: 'woche', checked: {} };
+const state = { person: 'beide', tab: 'woche', checked: {}, meal: 'alle', ingf: '', tagf: '' };
 
 try {
   Object.assign(state, JSON.parse(localStorage.getItem(STORE_KEY) || '{}'));
@@ -58,7 +58,7 @@ function totals() {
   }
   return Object.entries(sums).map(([id, need]) => {
     const ing = ING[id];
-    const countable = ['Stück', 'Bund', 'Schale'].includes(ing.u);
+    const countable = COUNTABLE.includes(ing.u);
     const pack = ing.pk || (countable ? [1, ''] : null);
     let packs = 0, left = 0;
     if (pack && ing.c !== 'vorrat') {
@@ -166,9 +166,11 @@ function renderLeftovers() {
       html += `<p class="note">Für eine Person allein bleiben angebrochene Packungen. Die Vorschläge unten helfen beim Verbrauchen.</p>`;
     }
     html += `<section class="card"><ul class="plain">${left.map((t) => {
-      const others = t.recipes.map((id) => RECIPES[id].n).join(' · ');
+      const more = recipesWith(t.id, [...PLAN_IDS]).slice(0, 4);
       return `<li><div class="ingr"><b>${t.ing.n}</b><span class="qty">${fmt(t.left, t.ing.u)} übrig</span></div>
-        <span class="muted">${t.ing.idee || 'In Restepfanne oder Suppe verwenden.'}<br>Im Plan verwendet in: ${others}</span></li>`;
+        <span class="muted">${t.ing.idee || 'In Restepfanne oder Suppe verwenden.'}</span>
+        ${more.length ? `<br><span class="muted">Rezepte damit:</span> ${more.map((id) =>
+          `<button class="link" data-recipe="${id}">${RECIPES[id].n}</button>`).join(' · ')}` : ''}</li>`;
     }).join('')}</ul></section>`;
   }
   html += `<h2>Wenn doch etwas übrig ist</h2><section class="card"><ul class="plain">${RESCUE.map(([n, text]) =>
@@ -176,9 +178,87 @@ function renderLeftovers() {
   view.innerHTML = html;
 }
 
-function renderLists(blocks, ordered) {
+function renderTips() {
+  const blocks = [...TIPS.slice(0, -1), ...PREP.map(([t, items]) => [`Vorkochen: ${t}`, items]), TIPS[TIPS.length - 1]];
   view.innerHTML = blocks.map(([title, items]) =>
-    `<h2>${title}</h2><section class="card"><ul class="${ordered ? 'plain' : 'dots'}">${items.map((i) => `<li>${i}</li>`).join('')}</ul></section>`).join('');
+    `<h2>${title}</h2><section class="card"><ul class="dots">${items.map((i) => `<li>${i}</li>`).join('')}</ul></section>`).join('');
+}
+
+// ---------- Rezeptsammlung ----------
+const MEAL_NAMES = { f: 'Frühstück', m: 'Mittag', a: 'Abend', s: 'Snack' };
+const PLAN_IDS = new Set(PLAN.flat());
+
+function mealOf(id) {
+  const r = RECIPES[id];
+  if (r.meal) return r.meal;
+  for (const day of PLAN) {
+    const i = day.indexOf(id);
+    if (i >= 0) return 'fma'[i];
+  }
+  return null;
+}
+
+// Alle eigenständigen Rezepte: ohne Reste-Aufwärmgerichte und die Snack-Sammelliste.
+function libraryIds() {
+  return Object.keys(RECIPES).filter((id) => id !== 'snacks' && !RECIPES[id].rest && mealOf(id));
+}
+
+// Für beide gleich: keine Zutat, die nur eine Person bekommt (Gewürze usw. ausgenommen).
+function sameForBoth(r) {
+  return r.ing.every((l) => !ING[l[0]].u || (l[1] > 0) === (l[2] > 0));
+}
+
+const FILTER_TAGS = [['', 'Alle'], ['hirn', 'Hirnnahrung'], ['ruhe', 'gegen Stress'], ['fisch', 'Omega-3 (er)'], ['gleich', 'für beide gleich'], ['schnell', 'bis 15 Min.']];
+
+function matchesTag(r, tag) {
+  if (!tag) return true;
+  if (tag === 'gleich') return sameForBoth(r);
+  if (tag === 'schnell') return r.min <= 15;
+  return r.tags.includes(tag);
+}
+
+function recipesWith(ingId, exclude = []) {
+  return libraryIds().filter((id) => !exclude.includes(id) && RECIPES[id].ing.some((l) => l[0] === ingId && (l[1] > 0 || l[2] > 0)));
+}
+
+function recipeRow(id) {
+  const r = RECIPES[id];
+  const v = variant(r);
+  const plan = PLAN_IDS.has(id) ? '<span class="tag rest">im Wochenplan</span>' : '';
+  return `<button class="meal" data-recipe="${id}">
+    <span class="slot">${MEAL_NAMES[mealOf(id)]}<br>${r.min} Min.</span>
+    <span><span class="name">${r.n}</span>${v ? `<br><span class="sub">${v}</span>` : ''}<br>${plan}${tags(r)}</span>
+  </button>`;
+}
+
+function renderRecipes() {
+  const all = libraryIds();
+  const usable = Object.keys(ING)
+    .filter((id) => ING[id].c !== 'vorrat' && recipesWith(id).length)
+    .sort((a, b) => ING[a].n.localeCompare(ING[b].n, 'de'));
+  const list = all.filter((id) => {
+    const r = RECIPES[id];
+    return (state.meal === 'alle' || mealOf(id) === state.meal)
+      && matchesTag(r, state.tagf)
+      && (!state.ingf || r.ing.some((l) => l[0] === state.ingf && (l[1] > 0 || l[2] > 0)));
+  });
+  const order = 'fmas';
+  list.sort((a, b) => order.indexOf(mealOf(a)) - order.indexOf(mealOf(b)) || RECIPES[a].n.localeCompare(RECIPES[b].n, 'de'));
+
+  view.innerHTML = `
+    <label class="finder"><span>Was ist übrig?</span>
+      <select id="ingfilter">
+        <option value="">Zutat wählen …</option>
+        ${usable.map((id) => `<option value="${id}"${state.ingf === id ? ' selected' : ''}>${ING[id].n}</option>`).join('')}
+      </select>
+    </label>
+    <div class="chips">${[['alle', 'Alle'], ...Object.entries(MEAL_NAMES)].map(([k, n]) =>
+      `<button class="chip${state.meal === k ? ' on' : ''}" data-meal="${k}">${n}</button>`).join('')}</div>
+    <div class="chips">${FILTER_TAGS.map(([k, n]) =>
+      `<button class="chip${state.tagf === k ? ' on' : ''}" data-tagf="${k}">${n}</button>`).join('')}</div>
+    <p class="muted">${list.length} von ${all.length} Rezepten${state.ingf ? ` mit ${ING[state.ingf].n}` : ''}.
+      ${state.ingf || state.meal !== 'alle' || state.tagf ? '<button class="link" data-action="clearfilter">Filter zurücksetzen</button>' : ''}</p>
+    <section class="card">${list.map(recipeRow).join('') || '<p class="muted">Nichts gefunden.</p>'}</section>`;
 }
 
 function showRecipe(id) {
@@ -206,13 +286,13 @@ function render() {
   document.querySelectorAll('#tabs button').forEach((b) => b.classList.toggle('on', b.dataset.tab === state.tab));
   if (state.tab === 'einkauf') renderShopping();
   else if (state.tab === 'reste') renderLeftovers();
-  else if (state.tab === 'vorkochen') renderLists(PREP, true);
-  else if (state.tab === 'tipps') renderLists(TIPS, false);
+  else if (state.tab === 'rezepte') renderRecipes();
+  else if (state.tab === 'tipps' || state.tab === 'vorkochen') renderTips();
   else renderWeek();
 }
 
 document.addEventListener('click', (e) => {
-  const el = e.target.closest('[data-person],[data-tab],[data-recipe],[data-action]');
+  const el = e.target.closest('[data-person],[data-tab],[data-recipe],[data-action],[data-meal],[data-tagf]');
   if (!el) {
     if (e.target === $('#recipe')) $('#recipe').close(); // Tipp neben das Fenster schließt es
     return;
@@ -220,6 +300,9 @@ document.addEventListener('click', (e) => {
   if (el.dataset.person) { state.person = el.dataset.person; save(); render(); }
   else if (el.dataset.tab) { state.tab = el.dataset.tab; save(); render(); window.scrollTo(0, 0); }
   else if (el.dataset.recipe) showRecipe(el.dataset.recipe);
+  else if (el.dataset.meal) { state.meal = el.dataset.meal; save(); render(); }
+  else if (el.dataset.tagf !== undefined) { state.tagf = el.dataset.tagf; save(); render(); }
+  else if (el.dataset.action === 'clearfilter') { state.meal = 'alle'; state.tagf = ''; state.ingf = ''; save(); render(); }
   else if (el.dataset.action === 'close') $('#recipe').close();
   else if (el.dataset.action === 'reset') { state.checked = {}; save(); render(); }
   else if (el.dataset.action === 'copy') {
@@ -230,6 +313,7 @@ document.addEventListener('click', (e) => {
 });
 
 document.addEventListener('change', (e) => {
+  if (e.target.id === 'ingfilter') { state.ingf = e.target.value; save(); render(); return; }
   const id = e.target.dataset?.check;
   if (!id) return;
   if (e.target.checked) state.checked[id] = true; else delete state.checked[id];

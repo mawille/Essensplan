@@ -9,7 +9,10 @@ Sie isst vegetarisch, er isst alles. Gekocht wird ein Gericht, nur die Eiweißqu
 - **Einkauf:** Wocheneinkauf nach Abteilung, in ganzen Packungen, zum Abhaken und Kopieren.
 - **Reste:** zeigt, was mit Absicht mehr gekocht wird und wo es wieder auftaucht, rechnet aus,
   welche angebrochenen Packungen übrig bleiben, und schlägt vor, was man daraus macht.
-- **Vorkochen** und **Tipps.**
+- **Rezepte:** 74 Rezepte (Wochenplan plus Sammlung in [`rezepte.js`](rezepte.js)) für Frühstück,
+  Mittag, Abend und Snacks. Filter nach Mahlzeit, Hirnnahrung, gegen Stress, Omega-3, „für beide gleich“
+  und „bis 15 Minuten“. „Was ist übrig?“ zeigt alle Rezepte mit einer bestimmten Zutat.
+- **Tipps** mit Vorkoch-Plan.
 
 ## Benutzen
 Reine Webseite ohne Build-Schritt. `index.html` im Browser öffnen genügt.
@@ -20,7 +23,8 @@ hinzufügen und läuft dann auch ohne Netz.
 
 ## Anpassen
 Alle Inhalte stehen in [`data.js`](data.js): Zutaten mit Packungsgrößen, Rezepte mit Mengen je Person
-(`[Zutat, sie, er]`), der Wochenplan, Reste-Ketten und Tipps. Einkaufsliste und Reste rechnet
+(`[Zutat, sie, er]`), der Wochenplan, Reste-Ketten und Tipps. Weitere Rezepte und ihre Zutaten stehen
+in `rezepte.js` (mit `meal`: `f` Frühstück, `m` Mittag, `a` Abend, `s` Snack). Einkaufsliste und Reste rechnet
 [`app.js`](app.js) daraus neu.
 
 Die Kalorien sind grob geschätzt. Der Plan ersetzt keine ärztliche Beratung.

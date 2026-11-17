@@ -80,8 +80,11 @@ const ING = {
   honig: { n: 'Honig', u: '', c: 'vorrat' },
   knoblauch: { n: 'Knoblauch', u: '', c: 'vorrat' },
   sesam: { n: 'Sesam', u: '', c: 'vorrat' },
-  gewuerze: { n: 'Jodsalz, Pfeffer, Paprikapulver, Kreuzkümmel, Oregano, Rosmarin, Zimt', u: '', c: 'vorrat' },
+  gewuerze: { n: 'Jodsalz, Pfeffer, Paprikapulver, Kreuzkümmel, Oregano, Rosmarin, Zimt, Kurkuma, Kümmel, Muskat', u: '', c: 'vorrat' },
 };
+
+// Einheiten, die ohne Packungsgröße als einzelne Stücke gekauft werden.
+const COUNTABLE = ['Stück', 'Bund', 'Schale'];
 
 // tags: hirn = Hirnnahrung, ruhe = gut gegen Stress, fisch = Omega-3 aus Fisch (er)
 // kcal: [sie, er] je Mahlzeit, grob geschätzt.
